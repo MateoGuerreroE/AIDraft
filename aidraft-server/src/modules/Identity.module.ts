@@ -4,7 +4,8 @@ import { UserRecord } from 'src/data';
 import { LoggingModule } from './Logging.module';
 import { ConfigModule } from './Config.module';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { ConfigService, UserService } from 'src/services';
+import { ConfigService, FireBaseAuthService, UserService } from 'src/services';
+import { AuthenticationService } from 'src/types';
 
 @Module({
   imports: [
@@ -21,7 +22,11 @@ import { ConfigService, UserService } from 'src/services';
     }),
   ],
   controllers: [],
-  providers: [UserService, JwtService],
+  providers: [
+    UserService,
+    JwtService,
+    { provide: AuthenticationService, useClass: FireBaseAuthService },
+  ],
   exports: [UserService],
 })
 export class IdentityModule {}
