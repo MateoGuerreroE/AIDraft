@@ -14,6 +14,9 @@ export default function ButtonComponent({
 }: Props) {
   return (
     <Button
+      className="font-semibold text-lg p-7 font-outfit"
+      radius="full"
+      fullWidth
       style={{ backgroundColor: `${hexBg}` }}
       onPress={() =>
         action ? action() : console.log("No action defined for this button")
