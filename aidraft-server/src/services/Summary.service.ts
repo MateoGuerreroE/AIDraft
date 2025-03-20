@@ -38,6 +38,7 @@ export class SummaryService {
     const summaryInstance = this.summaryRepository.create({
       note: { noteId },
       body: summary,
+      customInstructions: customInstructions ?? null,
       type,
     });
     return this.summaryRepository.save(summaryInstance);
