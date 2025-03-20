@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule as NestJsConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
+import { ConfigService } from 'src/services';
 
 @Module({
   imports: [
@@ -15,5 +16,7 @@ import * as Joi from 'joi';
       }),
     }),
   ],
+  providers: [ConfigService],
+  exports: [ConfigService],
 })
 export class ConfigModule {}
