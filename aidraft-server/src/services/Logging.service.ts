@@ -10,8 +10,8 @@ export class LoggingService extends Logger implements LoggerService {
     super.log(message);
   }
 
-  error(message: string) {
-    super.error(message);
+  error(message: string, trace: string) {
+    super.error(message, trace);
   }
 
   warn(message: string) {
