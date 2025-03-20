@@ -15,4 +15,8 @@ export class ConfigService {
       database: this.nestConfigService.get<string>('DB_NAME'),
     };
   }
+
+  getGeminiKey(): string {
+    return this.nestConfigService.get<string>('GEMINI_API_KEY');
+  }
 }
