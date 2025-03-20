@@ -1,6 +1,13 @@
 import { SummaryType } from 'src/types';
 import { generateId } from 'src/utils';
-import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryColumn,
+} from 'typeorm';
+import { NoteRecord } from './Note.entity';
 
 @Entity('Summary')
 export class SummaryRecord {
@@ -17,4 +24,7 @@ export class SummaryRecord {
   generateId() {
     this.summaryId = generateId();
   }
+
+  @ManyToOne(() => NoteRecord, (note) => note.summaries)
+  note: NoteRecord;
 }

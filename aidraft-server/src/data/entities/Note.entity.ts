@@ -4,8 +4,12 @@ import {
   Column,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
+import { UserRecord } from './User.entity';
+import { SummaryRecord } from './Summary.entity';
 
 @Entity('Note')
 export class NoteRecord {
@@ -25,4 +29,10 @@ export class NoteRecord {
 
   @DeleteDateColumn({ default: null, nullable: true })
   deletedAt: Date;
+
+  @ManyToOne(() => UserRecord, (user) => user.notes)
+  user: UserRecord;
+
+  @OneToMany(() => SummaryRecord, (summary) => summary.note)
+  summaries: SummaryRecord[];
 }

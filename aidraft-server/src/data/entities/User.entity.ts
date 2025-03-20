@@ -1,8 +1,15 @@
 import { generateId } from 'src/utils';
-import { BeforeInsert, Column, Entity, PrimaryColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
+import { NoteRecord } from './Note.entity';
 
 @Entity('User')
-export class UserEntity {
+export class UserRecord {
   @PrimaryColumn()
   userId: string;
 
@@ -22,4 +29,7 @@ export class UserEntity {
   generateId() {
     this.userId = generateId();
   }
+
+  @OneToMany(() => NoteRecord, (note) => note.user)
+  notes: NoteRecord[];
 }
