@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_local
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: notes_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - app_network
+
+  # mysql_test:
+  #   image: mysql:8.0
+  #   container_name: mysql_test
+  #   restart: always
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: test_db
+  #     MYSQL_USER: test_user
+  #     MYSQL_PASSWORD: test_password
+  #   ports:
+  #     - "3307:3306"
+  #   networks:
+  #     - app_network
+  #   tmpfs:
+  #     - /var/lib/mysql
+
+volumes:
+  mysql_data:
+
+networks:
+  app_network:
