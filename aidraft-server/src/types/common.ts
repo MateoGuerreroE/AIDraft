@@ -11,3 +11,8 @@ export type FirebaseEnvConfig = {
   private_key: string;
   client_email: string;
 };
+
+export interface IAuthUser {
+  userId: string;
+  email: string;
+}

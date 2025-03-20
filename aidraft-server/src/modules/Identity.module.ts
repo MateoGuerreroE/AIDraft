@@ -8,6 +8,7 @@ import { ConfigService, FireBaseAuthService, UserService } from 'src/services';
 import { AuthenticationService } from 'src/types';
 import { UserController } from 'src/controller';
 import { AuthController } from 'src/controller/Auth.controller';
+import { JwtStrategy } from 'src/Jwt.strategy';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { AuthController } from 'src/controller/Auth.controller';
   ],
   controllers: [UserController, AuthController],
   providers: [
+    JwtStrategy,
     UserService,
     JwtService,
     { provide: AuthenticationService, useClass: FireBaseAuthService },

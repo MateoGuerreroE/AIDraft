@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { NoteRecord, UpdateNoteDTO, UserRecord } from 'src/data';
 import { CreateNoteDTO } from 'src/data/dtos/CreateNote.dto';
-import { BadRequestError, NotFoundError } from 'src/types';
+import { BadRequestError, NotFoundError, UnauthorizedError } from 'src/types';
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -42,8 +42,21 @@ export class NoteService {
     return this.noteRepository.save(noteInstance);
   }
 
-  async updateNoteById(noteAttributes: UpdateNoteDTO): Promise<NoteRecord> {
+  async updateNoteById(
+    noteAttributes: UpdateNoteDTO,
+    updater: string,
+  ): Promise<NoteRecord> {
     const { noteId, ...updatedAttributes } = noteAttributes;
+    const existentNote = await this.noteRepository.findOne({
+      where: { noteId },
+      relations: { user: true },
+    });
+    if (!existentNote) {
+      throw new NotFoundError('Note to Update', { entityId: noteId });
+    }
+    if (updater !== existentNote.user.userId) {
+      throw new UnauthorizedError('Cannot update note you do not own');
+    }
     const { affected } = await this.noteRepository.update(
       { noteId },
       updatedAttributes,
