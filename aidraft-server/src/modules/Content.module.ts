@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { NoteRecord, SummaryRecord, UserRecord } from 'src/data';
 import { GeminiService, NoteService, SummaryService } from 'src/services';
 import { GenerativeAIService } from 'src/types';
+import { NoteController, SummaryController } from 'src/controller';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { GenerativeAIService } from 'src/types';
     SummaryService,
     { provide: GenerativeAIService, useClass: GeminiService },
   ],
+  controllers: [NoteController, SummaryController],
   exports: [NoteService, SummaryService],
 })
 export class ContentModule {}
