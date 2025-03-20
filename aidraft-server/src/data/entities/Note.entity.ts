@@ -2,11 +2,13 @@ import { generateId } from 'src/utils';
 import {
   BeforeInsert,
   Column,
+  CreateDateColumn,
   DeleteDateColumn,
   Entity,
   ManyToOne,
   OneToMany,
   PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { UserRecord } from './User.entity';
 import { SummaryRecord } from './Summary.entity';
@@ -21,6 +23,12 @@ export class NoteRecord {
 
   @Column({ type: 'text', nullable: true })
   content: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 
   @BeforeInsert()
   generateId() {
