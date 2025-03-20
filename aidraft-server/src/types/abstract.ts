@@ -1,4 +1,6 @@
+import { UserRecord } from 'src/data';
 import { SummaryType } from './enums';
+import { UserLoginResponse } from './response';
 
 export abstract class GenerativeAIService {
   abstract generateSummary(
@@ -20,4 +22,10 @@ export abstract class GenerativeAIService {
       ${customInstructions && customInstructions.length ? `Consider these specific instructions: ${customInstructions}` : ''}
       Please provide the summary below:`;
   }
+}
+
+export abstract class AuthenticationService {
+  abstract getEmailFromToken(loginToken: string): Promise<string>; // Should return email
+  abstract getUserToken(user: UserRecord): Promise<string>;
+  abstract loginUser(loginToken: string): Promise<UserLoginResponse>;
 }
