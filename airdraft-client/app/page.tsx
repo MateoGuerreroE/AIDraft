@@ -1,6 +1,5 @@
 "use client";
 import { Divider } from "@heroui/react";
-import { useGlobalStore } from "./store";
 import NotesEditor from "./NotesEditor";
 import AuthModal from "./AuthModal";
 
