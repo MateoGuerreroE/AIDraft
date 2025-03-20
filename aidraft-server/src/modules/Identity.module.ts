@@ -6,6 +6,8 @@ import { ConfigModule } from './Config.module';
 import { JwtModule, JwtService } from '@nestjs/jwt';
 import { ConfigService, FireBaseAuthService, UserService } from 'src/services';
 import { AuthenticationService } from 'src/types';
+import { UserController } from 'src/controller';
+import { AuthController } from 'src/controller/Auth.controller';
 
 @Module({
   imports: [
@@ -21,7 +23,7 @@ import { AuthenticationService } from 'src/types';
       inject: [ConfigService],
     }),
   ],
-  controllers: [],
+  controllers: [UserController, AuthController],
   providers: [
     UserService,
     JwtService,
