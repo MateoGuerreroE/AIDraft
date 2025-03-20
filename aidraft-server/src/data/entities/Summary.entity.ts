@@ -3,9 +3,12 @@ import { generateId } from 'src/utils';
 import {
   BeforeInsert,
   Column,
+  CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   ManyToOne,
   PrimaryColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { NoteRecord } from './Note.entity';
 
@@ -19,6 +22,18 @@ export class SummaryRecord {
 
   @Column({ type: 'text' })
   body: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
+
+  @Column({ nullable: true, default: null })
+  customInstructions: string;
+
+  @DeleteDateColumn({ nullable: true, default: null })
+  deletedAt: Date;
 
   @BeforeInsert()
   generateId() {

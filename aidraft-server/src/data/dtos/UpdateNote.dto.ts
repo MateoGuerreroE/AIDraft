@@ -1,7 +1,7 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsUUID } from 'class-validator';
 
 export class UpdateNoteDTO {
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   noteId!: string;
 

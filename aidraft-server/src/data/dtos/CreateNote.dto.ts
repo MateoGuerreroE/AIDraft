@@ -1,11 +1,11 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsString, IsUUID } from 'class-validator';
 
 export class CreateNoteDTO {
   @IsString()
   @IsNotEmpty()
   title!: string;
 
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   userId!: string;
 }
