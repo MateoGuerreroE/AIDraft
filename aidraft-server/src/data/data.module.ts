@@ -18,6 +18,7 @@ import { DatabaseInfo } from 'src/types/common';
           port: databaseInfo.port,
           username: databaseInfo.user,
           password: databaseInfo.password,
+          database: databaseInfo.database,
           entities: [__dirname + '/../**/*.entity{.ts,.js}'],
           synchronize: true,
         };
