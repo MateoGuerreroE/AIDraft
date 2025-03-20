@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService as NestJsConfigService } from '@nestjs/config';
-import { DatabaseInfo } from 'src/types/common';
+import { DatabaseInfo, FirebaseEnvConfig } from 'src/types/common';
 
 @Injectable()
 export class ConfigService {
@@ -18,5 +18,21 @@ export class ConfigService {
 
   getGeminiKey(): string {
     return this.nestConfigService.get<string>('GEMINI_API_KEY');
+  }
+
+  getFirebaseConfig(): FirebaseEnvConfig {
+    return {
+      client_email: this.nestConfigService.get<string>('FB_EMAIL'),
+      project_id: this.nestConfigService.get<string>('FB_PROJECT_ID'),
+      private_key: this.nestConfigService.get<string>('FB_KEY'),
+    };
+  }
+
+  getJwtSecret(): string {
+    return this.nestConfigService.get<string>('JWT_SECRET');
+  }
+
+  getDefaultExpiration(): number {
+    return parseInt(this.nestConfigService.get<string>('JWT_EXP') ?? '3600');
   }
 }
